@@ -1,36 +1,188 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LocalLume 🌟
 
-## Getting Started
+> **Local Development Domains Made Simple**
 
-First, run the development server:
+LocalLume is a modern web interface for managing local development domains, SSL certificates, and proxy configurations. Transform your `localhost:3000` into beautiful, memorable domain names like `myapp.local` with automatic HTTPS support.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+![LocalLume Dashboard](https://img.shields.io/badge/Status-Development-orange?style=flat-square)
+![Next.js](https://img.shields.io/badge/Next.js-15.4.6-black?style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square)
+![Tailwind](https://img.shields.io/badge/Tailwind-4-cyan?style=flat-square)
+
+## ✨ Features
+
+### 🔍 **Automatic Process Detection**
+- **Zero Configuration**: Automatically detects running development servers
+- **Framework Recognition**: Identifies Node.js, Python, React, Vue, and more
+- **Smart Domain Generation**: Creates `appname.local` domains instantly
+
+### 🛡️ **SSL Certificate Management**
+- **One-Click HTTPS**: Generate SSL certificates for any local domain
+- **Root CA Integration**: Install trusted certificate authority
+- **Browser Trust**: Seamless HTTPS experience in all browsers
+
+### 🌐 **Custom Domain Support**
+- **Flexible Routing**: Map any domain to localhost ports or external URLs
+- **Hosts File Management**: Automatic `/etc/hosts` or Windows hosts updates
+- **SSL Toggle**: Enable/disable HTTPS per domain
+
+### ⚡ **Proxy & Service Management**
+- **Reverse Proxy**: Route external traffic to local services
+- **Windows Service**: Run as background service with auto-start
+- **Traffic Inspection**: Monitor and debug network requests
+
+### 🎨 **Modern Interface**
+- **Dark/Light Themes**: Automatic system theme detection
+- **Responsive Design**: Works on desktop and mobile
+- **Real-time Updates**: Live status monitoring
+- **Intuitive UX**: Clean, professional interface
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Node.js** 18+ and npm
+- **Administrator privileges** (for hosts file and certificates)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/IamThiago-IT/locallume.git
+   cd locallume
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   ```
+   http://localhost:3000
+   ```
+
+## 📖 Usage Guide
+
+### Adding Your First Domain
+
+1. **Automatic Detection**: LocalLume scans for running processes
+2. **Custom Domains**: Click "Add Domain" to create custom mappings
+3. **SSL Setup**: Generate certificates for HTTPS support
+
+### Certificate Installation
+
+For full HTTPS support, install the Root Certificate Authority:
+
+1. Open Certificate Management in LocalLume
+2. Click "Install CA Certificate"
+3. Follow browser-specific instructions
+4. Restart your browser
+
+### Windows Service Setup
+
+Run LocalLume as a background service:
+
+1. Open Service Management
+2. Click "Install Service"
+3. Run the generated script as Administrator
+4. Service starts automatically on boot
+
+## 🏗️ Architecture
+
+```
+LocalLume/
+├── Frontend (Next.js + TypeScript)
+│   ├── Components (shadcn/ui)
+│   ├── Hooks (Custom business logic)
+│   └── Themes (Dark/Light mode)
+├── Certificate Management
+│   ├── Root CA Generation
+│   ├── Domain Certificates
+│   └── Trust Installation
+├── Process Detection
+│   ├── Port Scanning
+│   ├── Framework Recognition
+│   └── Auto Domain Creation
+└── System Integration
+    ├── Hosts File Management
+    ├── Windows Services
+    └── Proxy Configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
+- **Language**: [TypeScript 5](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Themes**: [next-themes](https://github.com/pacocoursey/next-themes)
+- **Fonts**: [Geist](https://vercel.com/font) font family
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Scripts
 
-## Learn More
+```bash
+# Development
+npm run dev          # Start dev server with Turbopack
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🔧 Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a `.env.local` file:
 
-## Deploy on Vercel
+```env
+# Development settings
+NEXT_PUBLIC_API_URL=http://localhost:3001
+NODE_ENV=development
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Custom Domains
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Domains are stored locally and can be:
+- **Auto-detected**: Based on running processes
+- **Custom**: Manually configured mappings
+- **External**: Proxy to remote services
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [shadcn](https://github.com/shadcn-ui/ui) for the amazing UI components
+- [Vercel](https://vercel.com/) for Next.js and deployment
+- [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/IamThiago-IT/locallume/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/IamThiago-IT/locallume/discussions)
+- **Documentation**: [Wiki](https://github.com/IamThiago-IT/locallume/wiki)
+
+---
+
+**Made with ❤️ for developers, by developers**
+
+Transform your local development experience with beautiful domains and seamless HTTPS. No more `localhost:3000` - welcome to the future of local development! 🚀
