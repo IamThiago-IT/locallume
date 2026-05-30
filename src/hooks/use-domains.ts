@@ -1,14 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-interface Domain {
-  id: string
-  domain: string
-  target: string
-  ssl: boolean
-  enabled: boolean
-}
+import { addDomain as addDomainEntry, deleteDomain as deleteDomainEntry, toggleDomain as toggleDomainEntry, type Domain } from '@/lib/domains'
 
 export function useDomains() {
   const [domains, setDomains] = useState<Domain[]>([])
@@ -23,14 +16,7 @@ export function useDomains() {
   const addDomain = async (domain: string, target: string, ssl: boolean): Promise<boolean> => {
     try {
       // TODO: Implement API call to add domain
-      const newDomain: Domain = {
-        id: domain.toLowerCase().replace(/\./g, '-'),
-        domain,
-        target,
-        ssl,
-        enabled: true,
-      }
-      setDomains([...domains, newDomain])
+      setDomains((currentDomains) => addDomainEntry(currentDomains, domain, target, ssl))
       return true
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to add domain')
@@ -41,9 +27,7 @@ export function useDomains() {
   const toggleDomain = async (domainId: string): Promise<void> => {
     try {
       // TODO: Implement API call to toggle domain
-      setDomains(
-        domains.map(d => (d.id === domainId ? { ...d, enabled: !d.enabled } : d))
-      )
+      setDomains((currentDomains) => toggleDomainEntry(currentDomains, domainId))
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to toggle domain')
     }
@@ -52,7 +36,7 @@ export function useDomains() {
   const deleteDomain = async (domainId: string): Promise<void> => {
     try {
       // TODO: Implement API call to delete domain
-      setDomains(domains.filter(d => d.id !== domainId))
+      setDomains((currentDomains) => deleteDomainEntry(currentDomains, domainId))
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to delete domain')
     }
