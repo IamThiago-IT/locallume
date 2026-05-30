@@ -138,6 +138,8 @@ Run LocalLume as a background service on your platform:
 
 ## 🏗️ Architecture
 
+The current architecture notes live in [docs/architecture.md](docs/architecture.md).
+
 ```
 LocalLume/
 ├── Frontend (Next.js + TypeScript)
@@ -153,7 +155,7 @@ LocalLume/
 │   ├── Framework Recognition
 │   └── Auto Domain Creation
 └── System Integration
-    ├── Hosts File Management
+   ├── Hosts File Management
    ├── Platform Services
     └── Proxy Configuration
 ```
