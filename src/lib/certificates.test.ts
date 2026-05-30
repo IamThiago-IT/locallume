@@ -17,8 +17,8 @@ describe('addCertificate', () => {
 describe('removeCertificate', () => {
   it('removes only the matching certificate', () => {
     const certificates: Certificate[] = [
-      { domain: 'one.local', isValid: true },
-      { domain: 'two.local', isValid: false },
+      { domain: 'one.local', isValid: true, expiresAt: new Date('2030-01-01T00:00:00.000Z') },
+      { domain: 'two.local', isValid: false, expiresAt: new Date('2030-01-01T00:00:00.000Z') },
     ]
 
     expect(removeCertificate(certificates, 'one.local')).toEqual([{ domain: 'two.local', isValid: false }])

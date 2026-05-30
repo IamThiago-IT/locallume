@@ -165,6 +165,12 @@ export function DomainsList({ category }: DomainsListProps) {
                 <div className="divide-y divide-border">
                   {project.domains.map((domain, index) => (
                     <div key={index} className="p-4">
+                      {(() => {
+                        const pid = "pid" in domain ? domain.pid : undefined
+                        const status = "status" in domain ? domain.status : undefined
+                        const customDomainId = "customDomainId" in domain ? domain.customDomainId : undefined
+
+                        return (
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4 flex-1">
                           <div className="flex items-center gap-2">
@@ -178,20 +184,20 @@ export function DomainsList({ category }: DomainsListProps) {
                             <span>{domain.localUrl}</span>
                           </div>
 
-                          {domain.pid && (
+                          {pid && (
                             <Badge variant="outline" className="text-xs">
-                              PID: {domain.pid}
+                              PID: {pid}
                             </Badge>
                           )}
 
-                          {domain.status && (
+                          {status && (
                             <div className="flex items-center gap-1">
                               <div
                                 className={`w-2 h-2 rounded-full ${
-                                  domain.status === "running" ? "bg-green-500" : "bg-red-500"
+                                  status === "running" ? "bg-green-500" : "bg-red-500"
                                 }`}
                               />
-                              <span className="text-xs text-muted-foreground capitalize">{domain.status}</span>
+                              <span className="text-xs text-muted-foreground capitalize">{status}</span>
                             </div>
                           )}
 
@@ -215,12 +221,8 @@ export function DomainsList({ category }: DomainsListProps) {
                             </span>
                             <Switch
                               checked={domain.published}
-                              onCheckedChange={
-                                domain.customDomainId
-                                  ? () => handleToggleCustomDomain(domain.customDomainId!)
-                                  : undefined
-                              }
-                              disabled={!domain.customDomainId}
+                              onCheckedChange={customDomainId ? () => handleToggleCustomDomain(customDomainId) : undefined}
+                              disabled={!customDomainId}
                             />
                           </div>
                           {project.type === "custom" && (
@@ -238,6 +240,8 @@ export function DomainsList({ category }: DomainsListProps) {
                           </Button>
                         </div>
                       </div>
+                        )
+                      })()}
                     </div>
                   ))}
                 </div>

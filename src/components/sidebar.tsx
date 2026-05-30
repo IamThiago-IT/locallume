@@ -160,7 +160,7 @@ export function Sidebar({ selectedCategory, onCategoryChange }: SidebarProps) {
               <span className="text-sm text-sidebar-foreground">http</span>
               {proxyStatus.isRunning && (
                 <Badge variant="outline" className="text-xs px-1">
-                  :{proxyStatus.port}
+                  :{proxyStatus.httpPort}
                 </Badge>
               )}
             </div>

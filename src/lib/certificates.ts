@@ -1,7 +1,7 @@
 export interface Certificate {
   domain: string
   isValid: boolean
-  expiresAt?: Date
+  expiresAt: Date
 }
 
 export function addCertificate(certificates: Certificate[], domain: string): Certificate[] {

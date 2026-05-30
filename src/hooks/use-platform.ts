@@ -11,7 +11,13 @@ export function usePlatform() {
       return
     }
 
-    const platformValue = navigator.userAgentData?.platform ?? navigator.platform ?? navigator.userAgent
+    const browserNavigator = navigator as Navigator & {
+      userAgentData?: {
+        platform?: string
+      }
+    }
+
+    const platformValue = browserNavigator.userAgentData?.platform ?? browserNavigator.platform ?? browserNavigator.userAgent
     setPlatform(detectPlatformFromValue(platformValue))
   }, [])
 
