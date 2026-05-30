@@ -6,6 +6,8 @@ interface ServiceStatus {
   installed: boolean
   running: boolean
   status: 'Running' | 'Stopped' | 'Pending'
+  displayName: string
+  description: string
 }
 
 export function useService() {
@@ -13,6 +15,8 @@ export function useService() {
     installed: false,
     running: false,
     status: 'Stopped',
+    displayName: 'LocalLume Proxy',
+    description: 'Proxy service not installed',
   })
   const [logs, setLogs] = useState<string[]>([])
   const [serviceDirectory, setServiceDirectory] = useState<string>('')
@@ -43,7 +47,13 @@ export function useService() {
     setError(null)
     try {
       // TODO: Implement API call to uninstall service
-      setStatus({ installed: false, running: false, status: 'Stopped' })
+      setStatus({
+        installed: false,
+        running: false,
+        status: 'Stopped',
+        displayName: 'LocalLume Proxy',
+        description: 'Proxy service not installed',
+      })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to uninstall service')
     } finally {
@@ -56,7 +66,13 @@ export function useService() {
     setError(null)
     try {
       // TODO: Implement API call to start service
-      setStatus({ ...status, running: true, status: 'Running' })
+      setStatus({
+        ...status,
+        installed: true,
+        running: true,
+        status: 'Running',
+        description: 'Proxy service is currently running',
+      })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to start service')
     } finally {
@@ -69,7 +85,13 @@ export function useService() {
     setError(null)
     try {
       // TODO: Implement API call to stop service
-      setStatus({ ...status, running: false, status: 'Stopped' })
+      setStatus({
+        ...status,
+        installed: true,
+        running: false,
+        status: 'Stopped',
+        description: 'Proxy service is currently stopped',
+      })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to stop service')
     } finally {

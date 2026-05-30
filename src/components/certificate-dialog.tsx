@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useCertificates } from "@/hooks/use-certificates"
 import { usePlatform } from "@/hooks/use-platform"
+import { getCertificateTrustSteps } from "@/lib/platform-copy"
 import { Shield, Plus, Trash2, Download, AlertTriangle } from "lucide-react"
 
 export function CertificateDialog() {
@@ -89,10 +90,11 @@ export function CertificateDialog() {
                     <AlertTriangle className="w-4 h-4 text-amber-500 mt-0.5" />
                     <div className="text-xs text-muted-foreground">
                       <p className="font-medium mb-1">To trust certificates in your browser:</p>
-                      {isWindows && <p>1. Install the CA certificate in the Windows certificate store.</p>}
-                      {isMacOS && <p>1. Import the CA certificate into Keychain Access and mark it as trusted.</p>}
-                      {isLinux && <p>1. Add the CA certificate to your system trust store.</p>}
-                      <p>2. Restart your browser after trusting the certificate.</p>
+                      {getCertificateTrustSteps(isWindows ? 'windows' : isMacOS ? 'macos' : isLinux ? 'linux' : 'unknown').map(
+                        (step, index) => (
+                          <p key={step}>{index + 1}. {step}</p>
+                        ),
+                      )}
                     </div>
                   </div>
                 </div>

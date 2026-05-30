@@ -27,9 +27,10 @@ import {
   Clock,
 } from "lucide-react"
 import { usePlatform } from "@/hooks/use-platform"
+import { getServiceManagementDescription } from "@/lib/platform-copy"
 
 export function ServiceManagement() {
-  const { platform, isWindows } = usePlatform()
+  const { platform } = usePlatform()
   const {
     status,
     logs,
@@ -91,11 +92,7 @@ export function ServiceManagement() {
             <Settings className="w-5 h-5" />
             Service Management
           </DialogTitle>
-          <DialogDescription>
-            {isWindows
-              ? 'Install LocalLume as a Windows service to run automatically in the background'
-              : `Install LocalLume as a background service for ${platform === 'unknown' ? 'your system' : platform}`}
-          </DialogDescription>
+          <DialogDescription>{getServiceManagementDescription(platform)}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
