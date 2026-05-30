@@ -1,16 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-interface Certificate {
-  domain: string
-  isValid: boolean
-  expiresAt?: Date
-}
+import { addCertificate, getInitialCaCertificateState, removeCertificate, type Certificate } from '@/lib/certificates'
 
 export function useCertificates() {
   const [certificates, setCertificates] = useState<Certificate[]>([])
-  const [caCertificate, setCACertificate] = useState<'Available' | 'Missing'>('Missing')
+  const [caCertificate, setCACertificate] = useState<'Available' | 'Missing'>(getInitialCaCertificateState())
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -22,7 +17,7 @@ export function useCertificates() {
     setLoading(true)
     try {
       // TODO: Implement API call to generate certificate
-      setCertificates([...certificates, { domain, isValid: true }])
+      setCertificates((currentCertificates) => addCertificate(currentCertificates, domain))
       return true
     } catch (error) {
       console.error('Failed to generate certificate:', error)
@@ -36,7 +31,7 @@ export function useCertificates() {
     setLoading(true)
     try {
       // TODO: Implement API call to delete certificate
-      setCertificates(certificates.filter(cert => cert.domain !== domain))
+      setCertificates((currentCertificates) => removeCertificate(currentCertificates, domain))
     } catch (error) {
       console.error('Failed to delete certificate:', error)
     } finally {
