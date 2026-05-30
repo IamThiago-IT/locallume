@@ -2,7 +2,7 @@
 
 > **Local Development Domains Made Simple**
 
-LocalLume is a modern web interface for managing local development domains, SSL certificates, and proxy configurations. Transform your `localhost:3000` into beautiful, memorable domain names like `myapp.local` with automatic HTTPS support.
+LocalLume is a modern web interface for managing local development domains, SSL certificates, and proxy configurations. It is being prepared for cross-platform desktop use while still working in the browser today. Transform your `localhost:3000` into beautiful, memorable domain names like `myapp.local` with automatic HTTPS support.
 
 ![LocalLume Dashboard](https://img.shields.io/badge/Status-Development-orange?style=flat-square)
 ![Next.js](https://img.shields.io/badge/Next.js-15.4.6-black?style=flat-square)
@@ -23,12 +23,12 @@ LocalLume is a modern web interface for managing local development domains, SSL 
 
 ### 🌐 **Custom Domain Support**
 - **Flexible Routing**: Map any domain to localhost ports or external URLs
-- **Hosts File Management**: Automatic `/etc/hosts` or Windows hosts updates
+- **Hosts File Management**: Automatic hosts updates with platform-aware guidance
 - **SSL Toggle**: Enable/disable HTTPS per domain
 
 ### ⚡ **Proxy & Service Management**
 - **Reverse Proxy**: Route external traffic to local services
-- **Windows Service**: Run as background service with auto-start
+- **System Service**: Run as a background service with auto-start
 - **Traffic Inspection**: Monitor and debug network requests
 
 ### 🎨 **Modern Interface**
@@ -41,7 +41,7 @@ LocalLume is a modern web interface for managing local development domains, SSL 
 
 ### Prerequisites
 - **Node.js** 18+ and npm
-- **Administrator privileges** (for hosts file and certificates)
+- **Administrator, root, or sudo privileges** may be needed for hosts file and certificate trust installation
 
 ### Installation
 
@@ -127,13 +127,13 @@ For full HTTPS support, install the Root Certificate Authority:
 3. Follow browser-specific instructions
 4. Restart your browser
 
-### Windows Service Setup
+### Service Setup
 
-Run LocalLume as a background service:
+Run LocalLume as a background service on your platform:
 
 1. Open Service Management
 2. Click "Install Service"
-3. Run the generated script as Administrator
+3. Approve the elevated install flow for your OS
 4. Service starts automatically on boot
 
 ## 🏗️ Architecture
@@ -154,7 +154,7 @@ LocalLume/
 │   └── Auto Domain Creation
 └── System Integration
     ├── Hosts File Management
-    ├── Windows Services
+   ├── Platform Services
     └── Proxy Configuration
 ```
 

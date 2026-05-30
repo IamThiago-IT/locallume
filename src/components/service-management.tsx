@@ -26,8 +26,10 @@ import {
   XCircle,
   Clock,
 } from "lucide-react"
+import { usePlatform } from "@/hooks/use-platform"
 
 export function ServiceManagement() {
+  const { platform, isWindows } = usePlatform()
   const {
     status,
     logs,
@@ -87,10 +89,12 @@ export function ServiceManagement() {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Settings className="w-5 h-5" />
-            Windows Service Management
+            Service Management
           </DialogTitle>
           <DialogDescription>
-            Install LocalCan as a Windows service to run automatically in the background
+            {isWindows
+              ? 'Install LocalLume as a Windows service to run automatically in the background'
+              : `Install LocalLume as a background service for ${platform === 'unknown' ? 'your system' : platform}`}
           </DialogDescription>
         </DialogHeader>
 
@@ -102,7 +106,7 @@ export function ServiceManagement() {
                 {getStatusIcon()}
                 Service Status
               </CardTitle>
-              <CardDescription>Current status of the LocalCan Proxy Service</CardDescription>
+              <CardDescription>Current status of the LocalLume proxy service</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -177,13 +181,13 @@ export function ServiceManagement() {
           <Card>
             <CardHeader>
               <CardTitle className="text-sm">Service Information</CardTitle>
-              <CardDescription>Details about the Windows service installation</CardDescription>
+              <CardDescription>Details about the background service installation</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Service Name:</span>
-                  <span className="font-mono">LocalCanProxy</span>
+                  <span className="font-mono">LocalLumeProxy</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Service Directory:</span>
@@ -224,8 +228,8 @@ export function ServiceManagement() {
           <Alert>
             <AlertTriangle className="h-4 w-4" />
             <AlertDescription className="text-sm">
-              <strong>Administrator privileges required:</strong> Installing and managing Windows services requires
-              administrator privileges. The system will create batch scripts that you need to run as administrator.
+              <strong>Elevated privileges required:</strong> Installing and managing system services may require
+              administrator, root, or sudo privileges depending on your platform.
             </AlertDescription>
           </Alert>
         </div>

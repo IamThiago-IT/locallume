@@ -92,7 +92,7 @@ export function DomainsList({ category }: DomainsListProps) {
           {!hasHostsPermissions && (
             <div className="flex items-center gap-2 text-amber-600">
               <AlertCircle className="w-4 h-4" />
-              <span className="text-sm">Admin required for hosts file</span>
+              <span className="text-sm">Elevated privileges required for hosts file</span>
             </div>
           )}
           <AddDomainDialog />

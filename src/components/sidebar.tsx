@@ -82,7 +82,7 @@ export function Sidebar({ selectedCategory, onCategoryChange }: SidebarProps) {
   }
 
   const certificateStatus = certificates.length > 0 ? "installed" : "not-installed"
-  const hasRootCA = certificates.some((cert) => cert.domain === "LocalCan Root CA")
+  const hasRootCA = certificates.some((cert) => cert.domain === "LocalLume Root CA")
 
   return (
     <div className="w-64 bg-sidebar border-r border-sidebar-border p-4 flex flex-col">
@@ -181,7 +181,7 @@ export function Sidebar({ selectedCategory, onCategoryChange }: SidebarProps) {
       {/* Root Certificate Section */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-medium text-sidebar-foreground">Root certificate</h2>
+          <h2 className="text-sm font-medium text-sidebar-foreground">Trusted certificate</h2>
           <Badge variant={hasRootCA ? "default" : "destructive"} className="text-xs">
             {hasRootCA ? "Installed" : "Missing"}
           </Badge>
